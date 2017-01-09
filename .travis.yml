@@ -2,7 +2,7 @@ services:
 - docker
 env:
   matrix:
-  - DOCKER_PATH=packer/latest CI_REGISTRY_IMAGE=teracy/packer IMAGE_TAG=latest
+  - DOCKER_PATH=packer/latest CI_REGISTRY_IMAGE=$DOCKER_USER/${DOCKER_IMAGE_PREFIX}packer IMAGE_TAG=latest
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:

@@ -13,11 +13,13 @@ ARG CI_BUILD_TIME
 ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE \
     CI_PROJECT_NAME=$CI_PROJECT_NAME CI_BUILD_REF_NAME=$CI_BUILD_REF_NAME CI_BUILD_TIME=$CI_BUILD_TIME
 
-ARG packer_dist=https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip
+ARG PACKER_VERSION=0.12.1
+
+ARG PACKER_DIST=https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
 
 RUN cd /tmp \
   && apt-get update && apt-get install wget unzip -f -y \
-  && wget $packer_dist \
+  && wget $PACKER_DIST \
   && unzip packer* \
   && mv packer /usr/local/bin \
   && rm packer*
