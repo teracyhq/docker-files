@@ -25,3 +25,5 @@ RUN cd /tmp \
   && rm packer*
 
 ENTRYPOINT ["packer"]
+
+CMD ["--help"]
