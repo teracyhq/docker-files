@@ -7,21 +7,6 @@ Docker image to use `packer` (https://www.packer.io/)
 
 ```
 $ docker run --rm -it -v $(pwd):/usr/src -w /usr/src teracy/packer --help
-```
-
-
-## Tips
-
-You should add alias to the docker run command as shortcut.
-
-```
-alias packer="docker run --rm -it -v $(pwd):/usr/src -w /usr/src teracy/packer"
-```
-
-And then you can use `packer` as normal.
-
-```
-$ packer
 usage: packer [--version] [--help] <command> [<args>]
 
 Available commands are:
@@ -33,4 +18,10 @@ Available commands are:
     version     Prints the Packer version
 
 
+```
+
+For example:
+
+```
+$ docker run --rm -it -v $(pwd):/usr/src -w /usr/src teracy/packer validate example.json
 ```
