@@ -2,18 +2,11 @@
 
 Teracy project to create Docker images.
 
-## packer (https://www.packer.io/)
+## How to use
 
-```
-$ docker run --rm -it teracy/packer help
-usage: packer [--version] [--help] <command> [<args>]
+Follow README.md files located at each Docker image directories.
 
-Available commands are:
-    build       build image(s) from template
-    fix         fixes templates from old versions of packer
-    inspect     see components of a template
-    push        push a template and supporting files to a Packer build service
-    validate    check that a template is valid
-    version     Prints the Packer version
-```
 
+# LICENSE
+
+MIT license. More details on the LICENSE file.
