@@ -1,4 +1,4 @@
-# docker-create-react-app
+# teracy/create-react-app Docker image
 
 
 Docker image to work on React projects with `create-react-app` pre-installed
