@@ -9,6 +9,7 @@ env:
   - IMG_REPO=angular-cli IMG_TAG=latest
   - IMG_REPO=create-react-app IMG_TAG=latest
   - IMG_REPO=node-ruby IMG_TAG=latest
+  - IMG_REPO=aws-cli IMG_TAG=latest
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:
