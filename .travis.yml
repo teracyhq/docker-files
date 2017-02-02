@@ -5,15 +5,19 @@ env:
   # it must have the following conventions name matching of directories:
   # $IMG_REPO/$IMG_TAG
   matrix:
-  - IMG_REPO=packer IMG_TAG=latest
-  - IMG_REPO=angular-cli IMG_TAG=latest
-  - IMG_REPO=create-react-app IMG_TAG=latest
-  - IMG_REPO=node-ruby IMG_TAG=latest
-  - IMG_REPO=aws-cli IMG_TAG=latest
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
+  - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
+  - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
+  - IMG_REPO=node-ruby BUILD_PATH=latest IMG_TAG=latest
+  - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
+  # additional tags
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.28.3 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.28.3"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.28 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.28"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.26 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.26"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:
-- export DOCKER_PATH=$IMG_REPO/$IMG_TAG
+- export DOCKER_PATH=$IMG_REPO/$BUILD_PATH
 - export CI_REGISTRY_IMAGE=$DOCKER_USER/${IMG_REPO_PREFIX}$IMG_REPO
 - export IMG_TAG_AFFIX=`if [ "$TRAVIS_BRANCH" != "master" ]; then echo "_${TRAVIS_BRANCH}" | sed -e 's/[\/]/-/g' | sed -e 's/[\#]//g'; fi`
 - export DOCKER_IMAGE=$CI_REGISTRY_IMAGE:$IMG_TAG$IMG_TAG_AFFIX
@@ -21,7 +25,7 @@ script:
 - docker build --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
   CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$DOCKER_PATH --build-arg
   CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
-  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $DOCKER_IMAGE $DOCKER_PATH
+  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG $DOCKER_ARGS --pull -t $DOCKER_IMAGE $DOCKER_PATH
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 - docker push $DOCKER_IMAGE;
