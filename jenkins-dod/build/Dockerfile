@@ -1,4 +1,4 @@
-FROM teracy/jenkins-dood
+FROM teracy/jenkins-dod
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
