@@ -17,7 +17,7 @@ $ sudo mkdir -p /var/jenkins_home && sudo chown -R $(whoami) /var/jenkins_home
 $ docker container run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock \
 -v $(which docker):/usr/bin/docker \
 -v $(which docker-compose):/usr/bin/docker-compose \
--v /var/jenkins_home/var/jenkins_home \
+-v /var/jenkins_home:/var/jenkins_home \
 -p 8080:8080 teracy/jenkins-dod
 $ docker logs -f jenkins
 ```
@@ -47,7 +47,7 @@ $ sudo mkdir -p /var/jenkins_home && sudo chown -R $(whoami) /var/jenkins_home
 $ docker container run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock \
 -v $(which docker):/usr/bin/docker \
 -v $(which docker-compose):/usr/bin/docker-compose \
--v /var/jenkins_home/var/jenkins_home \
+-v /var/jenkins_home:/var/jenkins_home \
 -p 8080:8080 teracy/jenkins-dod-build
 $ docker logs -f jenkins
 ```
