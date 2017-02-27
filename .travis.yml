@@ -5,18 +5,17 @@ env:
   # it must have the following conventions name matching of directories:
   # $IMG_REPO/$IMG_TAG
   matrix:
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=latest
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
   - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=node-ruby BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=jenkins-dod BUILD_PATH=latest IMG_TAG=latest
   # additional tags
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=1.0.0-beta.32.3 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.32.3"
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=1.0.0-beta.32.2 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.32.2"
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=1.0.0-beta.32 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.32"
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=1.0.0-beta.31 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.31"
-  - IMG_REPO=angular-cli BUILD_PATH=new-base IMG_TAG=1.0.0-beta.30 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.30"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-rc.0 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-rc.0"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.33.1 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.33.1"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.33 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.33"
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.32.3 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.32.3"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:
