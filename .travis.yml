@@ -12,10 +12,10 @@ env:
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=jenkins-dod BUILD_PATH=latest IMG_TAG=latest
   # additional tags
+  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-rc.1 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-rc.1"
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-rc.0 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-rc.0"
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.33.1 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.33.1"
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.33 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.33"
-  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0-beta.32.3 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0-beta.32.3"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:
