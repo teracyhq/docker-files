@@ -8,6 +8,7 @@ env:
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
   - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
+  - IMG_REPO=mongo-connector BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=node-ruby BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=jenkins-dod BUILD_PATH=latest IMG_TAG=latest
