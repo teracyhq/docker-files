@@ -34,6 +34,6 @@ RUN chmod +x /etc/init.d/xvfb \
 ENV DISPLAY :99.0
 ENV CHROME_BIN /usr/bin/google-chrome
 
-RUN npm install -g @angular/cli@$NG_CLI_VERSION && npm cache clean && rm -rf ~/.npm
+RUN yarn global add @angular/cli@$NG_CLI_VERSION && rm -rf $(yarn cache dir)
 
 ENTRYPOINT ["/entrypoint.sh"]
