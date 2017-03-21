@@ -43,6 +43,6 @@ $ http --help
 How to use `HTTPie` and `httpie-jwt-auth` plugin, please see:
 
 - https://httpie.org/
-- https://travis-ci.org/hoatle/httpie-jwt-auth
+- https://github.com/teracyhq/httpie-jwt-auth
 
 Enjoy!
