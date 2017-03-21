@@ -18,7 +18,7 @@ Follow README.md files located at each Docker image directories.
     + `DOCKER_USER` for the user or organization Docker namespace
     + `DOCKER_USERNAME` for the username of the Docker Hub
     + `DOCKER_PASSWORD` for the password of the Docker Hub
-    + `IMG_REPO_PREFIX` is optional
+    + `DOCKER_REPO_PREFIX` is optional
 
   See .travis.yml for details
 

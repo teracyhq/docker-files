@@ -10,26 +10,35 @@ How to use
 Make sure you have the latest Docker version installed on your machine.
 
 ```bash
-$ mkdir new-ng2-app
-$ cd new-ng2-app
-$ docker run -it -v $(pwd):/usr/src -w /usr/src hoatle/teracy-angular-cli /bin/bash
+$ docker container run --rm -it -v $(pwd):/opt -w /opt teracy/angular-cli /bin/bash
 Starting virtual X frame buffer: Xvfb.
 Executing command /bin/bash
-root@4b15ab7dbf21:/usr/src# ng --version
-
-                             _                           _  _
-  __ _  _ __    __ _  _   _ | |  __ _  _ __         ___ | |(_)
- / _` || '_ \  / _` || | | || | / _` || '__|_____  / __|| || |
-| (_| || | | || (_| || |_| || || (_| || |  |_____|| (__ | || |
- \__,_||_| |_| \__, | \__,_||_| \__,_||_|          \___||_||_|
+root@265dcf6e7241:/opt# ng --version
+    _                      _                 ____ _     ___
+   / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+  / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+ / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+/_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
                |___/
-@angular/cli: 1.0.0-beta.30
-node: 6.9.5
+@angular/cli: 1.0.0-rc.2
+node: 6.10.0
 os: linux x64
-root@4b15ab7dbf21:/usr/src# ng init --name hello --style scss -sn
-root@4b15ab7dbf21:/usr/src# npm install
-root@4b15ab7dbf21:/usr/src# ng serve
+root@265dcf6e7241:/opt# ng new new-ng2-app --style scss -sg -si
+root@265dcf6e7241:/opt# cd new-ng2-app
+root@265dcf6e7241:/opt/new-ng2-app# ng set --global packageManager=yarn
 ```
+
+and then:
+
+```bash
+$ cd new-ng-app
+$ docker container run --name new-ng2-app -it -v $(pwd):/opt/app -w /opt/app -p 4200:4200 teracy/angular-cli /bin/bash
+Starting virtual X frame buffer: Xvfb.
+Executing command /bin/bash
+root@0273ddf59943:/opt/app# yarn
+root@0273ddf59943:/opt/app# ng serve --host=0.0.0.0
+```
+
 
 For better developer experience with best practices, please follow this blog post:
 

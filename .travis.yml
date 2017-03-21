@@ -8,6 +8,8 @@ env:
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
   - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
+  - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=latest DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
+  - IMG_REPO=httpie-jwt-auth BUILD_PATH=base-alpine IMG_TAG=latest-alpine DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
   - IMG_REPO=jenkins-dod BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=mongo-connector BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=node-ruby BUILD_PATH=latest IMG_TAG=latest
@@ -22,14 +24,15 @@ env:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_script:
 - export DOCKER_PATH=$IMG_REPO/$BUILD_PATH
-- export CI_REGISTRY_IMAGE=$DOCKER_USER/${IMG_REPO_PREFIX}$IMG_REPO
+- export CI_REGISTRY_IMAGE=$DOCKER_USER/${DOCKER_REPO_PREFIX}$IMG_REPO
 - export IMG_TAG_AFFIX=`if [ "$TRAVIS_BRANCH" != "master" ]; then echo "_${TRAVIS_BRANCH}" | sed -e 's/[\/]/-/g' | sed -e 's/[\#]//g'; fi`
 - export DOCKER_IMAGE=$CI_REGISTRY_IMAGE:$IMG_TAG$IMG_TAG_AFFIX
 script:
 - docker build --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
   CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$DOCKER_PATH --build-arg
   CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
-  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG $DOCKER_ARGS --pull -t $DOCKER_IMAGE $DOCKER_PATH
+  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --build-arg CI_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER --build-arg
+  CI_BUILDER=travis-ci $DOCKER_ARGS --pull -t $DOCKER_IMAGE $DOCKER_PATH
 after_success:
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-- docker push $DOCKER_IMAGE;
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker push $DOCKER_IMAGE
