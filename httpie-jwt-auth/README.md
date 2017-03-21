@@ -9,13 +9,13 @@ There are 2 types of Docker images: Ubuntu and Alpine base, you should use the A
 a very small Docker image unless you really want to use the Ubuntu Docker image base.
 
 ```
-$ docker run --rm teracy/httpie-jwt-auth:latest-alpine --help
+$ docker container run -it --rm teracy/httpie-jwt-auth:latest-alpine --help
 ```
 
 or:
 
 ```
-$ docker run --rm teracy/httpie-jwt-auth:latest --help
+$ docker container run -it --rm teracy/httpie-jwt-auth:latest --help
 ```
 
 # Tips
@@ -25,7 +25,7 @@ You should use alias for shorter command, for example, add the following line in
 
 
 ```
-alias http="docker run --rm teracy/httpie-jwt-auth:latest"
+alias http="docker container run -it --rm teracy/httpie-jwt-auth:latest-alpine"
 ```
 
 and then:
