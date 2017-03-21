@@ -40,6 +40,12 @@ and finally:
 $ http --help
 ```
 
+If you want the container to use `/etc/hosts` from the local machine, use this:
+
+```
+alias http="docker container run -it --rm --net=host teracy/httpie-jwt-auth:latest-alpine"
+```
+
 How to use `HTTPie` and `httpie-jwt-auth` plugin, please see:
 
 - https://httpie.org/
