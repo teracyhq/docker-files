@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:edge
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
@@ -16,7 +16,19 @@ ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_RE
     CI_PROJECT_NAME=$CI_PROJECT_NAME CI_BUILD_REF_NAME=$CI_BUILD_REF_NAME CI_BUILD_TIME=$CI_BUILD_TIME \
     CI_BUILD_NUMBER=$CI_BUILD_NUMBER CI_BUILDER=$CI_BUILDER
 
+# thanks to: https://github.com/mvertes/docker-alpine-mongo/blob/master/Dockerfile
 
-RUN echo 'http://dl-3.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    && apk upgrade --update \
-    && apk add mongodb
+RUN \
+echo http://dl-4.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+apk add --no-cache mongodb && \
+rm /usr/bin/mongosniff /usr/bin/mongoperf
+
+VOLUME /data/db
+
+EXPOSE 27017 28017
+
+COPY run.sh /root
+
+ENTRYPOINT ["/root/run.sh"]
+
+CMD ["mongod"]
