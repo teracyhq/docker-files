@@ -10,7 +10,7 @@ How to use
 Make sure you have the latest Docker version installed on your machine.
 
 ```bash
-$ docker container run --rm -it -v $(pwd):/opt -w /opt teracy/angular-cli /bin/bash
+$ docker run --rm -it -v $(pwd):/opt -w /opt teracy/angular-cli /bin/bash
 Starting virtual X frame buffer: Xvfb.
 Executing command /bin/bash
 root@265dcf6e7241:/opt# ng --version
