@@ -39,12 +39,29 @@ root@0273ddf59943:/opt/app# yarn
 root@0273ddf59943:/opt/app# ng serve --host=0.0.0.0
 ```
 
+Tests with Chrome
+-----------------
+
+By default Chrome tests did not work within a Docker container, you need to configure karma and
+protractor for running tests within the Docker container.
+
+See:
+
+- https://github.com/teracyhq/angular-boilerplate/blob/master/karma.conf.js#L42
+- https://github.com/teracyhq/angular-boilerplate/blob/master/protractor.conf.js#L13
+
+`--no-sandbox` option must be used for Chrome to get it running within the Docker container.
+
+and to run unit tests: `$ ng test --browsers Chrome_no_sandbox`, e2e tests: `$ ng e2e`.
+
+You should refer to https://github.com/teracyhq/angular-boilerplate for best practices and working config.
+
 
 For better developer experience with best practices, please follow this blog post:
 
-http://blog.teracy.com/2016/09/22/how-to-develop-angular-2-applications-easily-with-docker-and-angular-cli/
+http://blog.teracy.com/2017/03/22/how-to-develop-angular-2-applications-easily-with-docker-angular-cli-and-angular-boilerplate/
 
-and use this: https://github.com/teracyhq/angular-boilerplate
+and use https://github.com/teracyhq/angular-boilerplate
 
 
 How to develop
