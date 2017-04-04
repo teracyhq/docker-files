@@ -54,6 +54,19 @@ See:
 
 and to run unit tests: `$ ng test --browsers Chrome_no_sandbox`, e2e tests: `$ ng e2e`.
 
+You should update this line on the package.json file:
+
+```
+"test": "ng test --browsers Chrome_no_sandbox"
+```
+
+By defaul, karma test runs and watches. To disable watch, you should use this on CI systems instead:
+
+```
+$ ng test --browsers Chrome_no_sandbox -w false
+```
+
+
 You should refer to https://github.com/teracyhq/angular-boilerplate for best practices and working config.
 
 
