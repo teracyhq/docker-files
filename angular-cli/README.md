@@ -10,7 +10,7 @@ How to use
 Make sure you have the latest Docker version installed on your machine.
 
 ```bash
-$ docker container run --rm -it -v $(pwd):/opt -w /opt teracy/angular-cli /bin/bash
+$ docker run --rm -it -v $(pwd):/opt -w /opt teracy/angular-cli /bin/bash
 Starting virtual X frame buffer: Xvfb.
 Executing command /bin/bash
 root@265dcf6e7241:/opt# ng --version
@@ -32,7 +32,7 @@ and then:
 
 ```bash
 $ cd new-ng-app
-$ docker container run --name new-ng2-app -it -v $(pwd):/opt/app -w /opt/app -p 4200:4200 teracy/angular-cli /bin/bash
+$ docker run --name new-ng2-app -it -v $(pwd):/opt/app -w /opt/app -p 4200:4200 teracy/angular-cli /bin/bash
 Starting virtual X frame buffer: Xvfb.
 Executing command /bin/bash
 root@0273ddf59943:/opt/app# yarn
