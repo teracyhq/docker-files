@@ -21,7 +21,7 @@ ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_RE
 RUN \
 echo http://dl-4.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
 apk add --no-cache mongodb && \
-rm /usr/bin/mongosniff /usr/bin/mongoperf
+rm -f /usr/bin/mongosniff /usr/bin/mongoperf
 
 VOLUME /data/db
 
