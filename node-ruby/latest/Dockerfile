@@ -1,4 +1,4 @@
-FROM node:6.9
+FROM node:6.10
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
