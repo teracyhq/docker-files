@@ -31,7 +31,7 @@ root@265dcf6e7241:/opt/new-ng2-app# ng set --global packageManager=yarn
 and then:
 
 ```bash
-$ cd new-ng-app
+$ cd new-ng2-app
 $ docker container run --name new-ng2-app -it -v $(pwd):/opt/app -w /opt/app -p 4200:4200 teracy/angular-cli /bin/bash
 Starting virtual X frame buffer: Xvfb.
 Executing command /bin/bash
