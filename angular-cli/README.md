@@ -28,7 +28,7 @@ root@265dcf6e7241:/opt# cd new-ng2-app
 root@265dcf6e7241:/opt/new-ng2-app# ng set --global packageManager=yarn
 ```
 
-and then:
+"exit" the running container and then run a new container with:
 
 ```bash
 $ cd new-ng2-app
