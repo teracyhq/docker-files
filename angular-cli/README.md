@@ -60,7 +60,7 @@ You should update this line on the package.json file:
 "test": "ng test --browsers Chrome_no_sandbox"
 ```
 
-By defaul, karma test runs and watches. To disable watch, you should use this on CI systems instead:
+By default, karma test runs and watches. To disable watch, you should use this on CI systems instead:
 
 ```
 $ ng test --browsers Chrome_no_sandbox -w false
