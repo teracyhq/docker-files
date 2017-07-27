@@ -1,4 +1,4 @@
-FROM google/cloud-sdk
+FROM teracy/ubuntu:14.04-dind
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
@@ -16,7 +16,14 @@ ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_RE
     CI_PROJECT_NAME=$CI_PROJECT_NAME CI_BUILD_REF_NAME=$CI_BUILD_REF_NAME CI_BUILD_TIME=$CI_BUILD_TIME \
     CI_BUILD_NUMBER=$CI_BUILD_NUMBER CI_BUILDER=$CI_BUILDER
 
-RUN apt-get install -qy curl && \
-    curl curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh && \
-    sed -i -e 's/sudo //g' get_helm.sh && \
-    chmod 700 get_helm.sh && ./get_helm.sh
+# install google-cloud-sdk
+RUN export PATH=$PATH:${HOME}/google-cloud-sdk/bin; \
+    export CLOUDSDK_CORE_DISABLE_PROMPTS=1; \
+    curl https://sdk.cloud.google.com | bash; \
+    gcloud components install kubectl; \
+    # install helm
+    curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash; \
+    # link installed bin
+    ln -s ${HOME}/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud; \
+    ln -s ${HOME}/google-cloud-sdk/bin/gsutil /usr/local/bin/gsutil; \
+    ln -s ${HOME}/google-cloud-sdk/bin/kubectl /usr/local/bin/kubectl;
