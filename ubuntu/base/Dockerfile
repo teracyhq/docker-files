@@ -18,7 +18,7 @@ ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_RE
 
 ENV DOCKER_COMPOSE_VERSION 1.14.0
 
-RUN apt-get update && apt-get install -q -y wget curl; \
+RUN apt-get update && apt-get install -q -y wget curl python; \
     curl -sSL https://get.docker.com/ | sh; \
     curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose; \
     chmod +x docker-compose; \
