@@ -7,6 +7,7 @@ env:
   matrix:
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
+  - IMG_REPO=chefdk BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=duplicity BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=google-cloud-sdk BUILD_PATH=base IMG_TAG=latest
