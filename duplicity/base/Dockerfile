@@ -30,3 +30,9 @@ RUN apk add --no-cache \
   && update-ca-certificates \
   && pip install pydrive==1.3.1 \
   && apk del --purge py-pip
+
+ADD entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
