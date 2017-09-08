@@ -6,7 +6,7 @@ env:
   # $IMG_REPO/$IMG_TAG
   matrix:
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=latest
-  - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest 
+  - IMG_REPO=aws-cli BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=chefdk BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=create-react-app BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=duplicity BUILD_PATH=base IMG_TAG=latest
@@ -17,7 +17,7 @@ env:
   - IMG_REPO=mongo-connector BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=mongo-alpine BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=node-ruby BUILD_PATH=latest IMG_TAG=latest
-  - IMG_REPO=ubuntu  BUILD_PATH=base IMG_TAG=14.04-dind
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-latest
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=python-coveralls BUILD_PATH=base IMG_TAG=latest
   # additional tags
@@ -26,6 +26,7 @@ env:
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base-alpine IMG_TAG=0.3.0-alpine DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.3.0"
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=0.2.1 DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base-alpine IMG_TAG=0.2.1-alpine DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-latest DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_install:
