@@ -89,11 +89,14 @@ $ ws
 $ cd teracy-docker-files/ubuntu/base/
 ```
 
-Build default ubuntu version with default(latest) docker version:
+Build a default ubuntu version with the default (latest) docker version:
+
 ```bash
-$ docker build -t teracy/ubuntu:16.04-dind-latest.
+$ docker build -t teracy/ubuntu:16.04-dind-latest .
 ```
-Build specific ubuntu version with specific docker version:
+
+Build a specific ubuntu version with a specific docker version:
+
 ```bash
 $ docker build -t teracy/ubuntu:14.04-dind-17.05.0-ce --build-arg UBUNTU_VERSION=14.04 --build-arg DOCKER_VERSION=17.05.0-ce .
 ```
