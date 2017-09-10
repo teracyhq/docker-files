@@ -27,8 +27,10 @@ env:
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=0.2.1 DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base-alpine IMG_TAG=0.2.1-alpine DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
   - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-latest DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04"
-  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-17.06.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04 --build-arg DOCKER_VERSION=17.06.0-ce"
-  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-17.06.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=16.04 --build-arg DOCKER_VERSION=17.06.0-ce"
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-17.06.2-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04 --build-arg DOCKER_VERSION=17.06.2-ce"
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-17.06.2-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=16.04 --build-arg DOCKER_VERSION=17.06.2-ce"
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-17.07.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04 --build-arg DOCKER_VERSION=17.07.0-ce"
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-17.07.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=16.04 --build-arg DOCKER_VERSION=17.07.0-ce"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_install:
