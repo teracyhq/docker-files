@@ -10,11 +10,14 @@ Tagging convention: `teracy/ubuntu:<platform_version>-dind-<docker_version>`.
 For example: `teracy/ubuntu:16.04-dind-17.06.0-ce`.
 
 
+- To get docker volume mapping work, you should use the below usage example for each specific directory
+
+
 Docker in Docker (DinD):
 
 ```
-$ docker run --privileged --name docker -d docker:17.06.0-dind
-$ docker run --rm -it --link docker -v $(pwd):/builds/project -w /builds/project teracy/ubuntu:16.04-dind-17.06.0-ce sh
+$ docker run --privileged --name docker -d -v $(pwd):$(pwd) -w $(pwd) docker:17.06.0-dind
+$ docker run --rm -it --link docker -v $(pwd):$(pwd) -w $(pwd) teracy/ubuntu:16.04-dind-17.06.0-ce bash
 # pwd
 /builds/project
 # docker version
@@ -45,7 +48,7 @@ OpenSSL version: OpenSSL 1.0.1t  3 May 2016
 Docker outside of Docker (DooD):
 
 ```
-$ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/builds/project -w /builds/project  teracy/ubuntu:16.04-dind-17.06.0-ce sh
+$ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/$(pwd) -w $(pwd) teracy/ubuntu:16.04-dind-17.06.0-ce bash
 # docker version
 Client:
  Version:      17.06.0-ce
