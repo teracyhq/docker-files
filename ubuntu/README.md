@@ -18,8 +18,6 @@ Docker in Docker (DinD):
 ```
 $ docker run --privileged --name docker -d -v $(pwd):$(pwd) -w $(pwd) docker:17.06.0-dind
 $ docker run --rm -it --link docker -v $(pwd):$(pwd) -w $(pwd) teracy/ubuntu:16.04-dind-17.06.0-ce bash
-# pwd
-/builds/project
 # docker version
 Client:
  Version:      17.06.0-ce
