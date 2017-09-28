@@ -1,4 +1,6 @@
-FROM alpine:edge
+ARG ALPINE_VERSION=edge
+
+FROM alpine:$ALPINE_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 

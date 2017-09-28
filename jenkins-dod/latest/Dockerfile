@@ -1,4 +1,6 @@
-FROM jenkins
+ARG JENKINS_VERSION=latest
+
+FROM jenkins:$JENKINS_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 

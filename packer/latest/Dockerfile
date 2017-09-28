@@ -1,4 +1,6 @@
-FROM debian:jessie
+ARG DEBIAN_VERSION=jessie
+
+FROM debian:$DEBIAN_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
