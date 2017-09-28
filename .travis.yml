@@ -51,11 +51,7 @@ before_script:
 - export IMG_TAG_AFFIX=`if [ "$TRAVIS_BRANCH" != "master" ]; then echo "_${TRAVIS_BRANCH}" | sed -e 's/[\/]/-/g' | sed -e 's/[\#]//g'; fi`
 - export DOCKER_IMAGE=$CI_REGISTRY_IMAGE:$IMG_TAG$IMG_TAG_AFFIX
 script:
-- docker build --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
-  CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$DOCKER_PATH --build-arg
-  CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
-  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --build-arg CI_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER --build-arg
-  CI_BUILDER=travis-ci $DOCKER_ARGS --pull -t $DOCKER_IMAGE $DOCKER_PATH
+- docker build --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE $DOCKER_ARGS --pull -t $DOCKER_IMAGE $DOCKER_PATH
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker push $DOCKER_IMAGE
