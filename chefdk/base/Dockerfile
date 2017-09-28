@@ -1,4 +1,6 @@
-FROM chef/chefdk
+ARG CHEFDK_VERSION=latest
+
+FROM chef/chefdk:$CHEFDK_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 

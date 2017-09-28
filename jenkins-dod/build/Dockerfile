@@ -1,4 +1,6 @@
-FROM teracy/jenkins-dod
+ARG JENKINS_DOD_VERSION=latest
+
+FROM teracy/jenkins-dod:$JENKINS_DOD_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
