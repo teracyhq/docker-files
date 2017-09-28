@@ -1,4 +1,6 @@
-FROM teracy/ubuntu:14.04-dind
+ARG UBUNTU_VERSION=16.04
+ARG DOCKER_VERSION="latest"
+FROM teracy/ubuntu:${UBUNTU_VERSION}-dind-${DOCKER_VERSION}
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
