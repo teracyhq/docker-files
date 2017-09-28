@@ -1,4 +1,5 @@
-FROM python:2.7-alpine
+ARG PYTHON_VERSION=2.7-alpine
+FROM python:${PYTHON_VERSION}
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
