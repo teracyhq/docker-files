@@ -1,0 +1,14 @@
+{
+    "vm": {
+      "synced_folders":[{ // Enable this for .git two-way sync
+        "_id": "docker-files-0",
+        "type": "virtual_box",
+        "host": "./workspace/docker-files/.git",
+        "guest": "/home/vagrant/workspace/docker-files/.git",
+        "mount_options": [
+          "dmode=775",
+          "fmode=755"
+        ]
+      }]
+    }
+  }

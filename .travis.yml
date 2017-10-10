@@ -20,6 +20,7 @@ env:
   - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-latest
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=python-coveralls BUILD_PATH=base IMG_TAG=latest
+  - IMG_REPO=travis BUILD_PATH=base IMG_TAG=latest
   # additional tags
   - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.0.0 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.0.0"
   - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=0.3.0 DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.3.0"
