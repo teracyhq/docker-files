@@ -45,12 +45,12 @@ before_install:
 - sudo curl -sSL https://get.docker.com/ | sh
 - sudo rm /usr/local/bin/docker-compose
 # the latest docker-compose version
-- export DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
-- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-- chmod +x docker-compose
-- sudo mv docker-compose /usr/local/bin
+# - export DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+# - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+# - chmod +x docker-compose
+# - sudo mv docker-compose /usr/local/bin
 - docker version
-- docker-compose version
+# - docker-compose version
 before_script:
 - export DOCKER_PATH=$IMG_REPO/$BUILD_PATH
 - export CI_REGISTRY_IMAGE=$DOCKER_USER/${DOCKER_REPO_PREFIX}$IMG_REPO
