@@ -23,7 +23,7 @@ env:
   - IMG_REPO=travis BUILD_PATH=base IMG_TAG=latest
   # additional tags, build once and then disable to reduce the travis-ci build time
   # - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.5.0 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.5.0"
-  - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.7.4 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.7.4"
+  # - IMG_REPO=angular-cli BUILD_PATH=base IMG_TAG=1.7.4 DOCKER_ARGS="--build-arg NG_CLI_VERSION=1.7.4"
   # - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=0.3.0 DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.3.0"
   # - IMG_REPO=httpie-jwt-auth BUILD_PATH=base-alpine IMG_TAG=0.3.0-alpine DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.3.0"
   # - IMG_REPO=httpie-jwt-auth BUILD_PATH=base IMG_TAG=0.2.1 DOCKER_ARGS="--build-arg HTTPIE_JWT_AUTH_VERSION=0.2.1"
