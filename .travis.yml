@@ -37,6 +37,8 @@ env:
   # - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=14.04-dind-17.07.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=14.04 --build-arg DOCKER_VERSION=17.07.0-ce"
   # - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-17.07.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=16.04 --build-arg DOCKER_VERSION=17.07.0-ce"
   # - IMG_REPO=watchman BUILD_PATH=base IMG_TAG=4.9.0 DOCKER_ARGS="--build-arg WATCHMAN_VERSION=v4.9.0"
+  - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=8.15 DOCKER_ARGS="--build-arg NODE_VERSION=8.15"
+  - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=10.15 DOCKER_ARGS="--build-arg NODE_VERSION=10.15"
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 before_install:
