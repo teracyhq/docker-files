@@ -1,4 +1,4 @@
-ARG NODE_VERSION=8
+ARG NODE_VERSION=10
 FROM node:$NODE_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
@@ -46,6 +46,6 @@ RUN chmod +x /etc/init.d/xvfb \
 ENV DISPLAY :99.0
 ENV CHROME_BIN /usr/bin/google-chrome
 
-RUN yarn global add @angular/cli@$NG_CLI_VERSION && rm -rf $(yarn cache dir)
+RUN yarn global add @angular/cli@$NG_CLI_VERSION -T && rm -rf $(yarn cache dir)
 
 ENTRYPOINT ["/entrypoint.sh"]
