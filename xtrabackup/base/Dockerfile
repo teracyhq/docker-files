@@ -9,7 +9,7 @@ ARG XTRABACKUP_PACKAGE=percona-xtrabackup
 
 RUN apt-get update \
     && apt-get install -y --force-yes \
-        apt-transport-https ca-certificates \
+        apt-transport-https ca-certificates mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 9334A25F8507EFA5
