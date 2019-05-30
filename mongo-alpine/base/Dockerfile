@@ -11,14 +11,17 @@ ARG CI_REGISTRY_IMAGE
 ARG CI_BUILD_TIME
 
 ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE \
-    CI_BUILD_TIME=$CI_BUILD_TIME
+  CI_BUILD_TIME=$CI_BUILD_TIME
 
 # thanks to: https://github.com/mvertes/docker-alpine-mongo/blob/master/Dockerfile
 
 RUN \
-echo http://dl-4.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-apk add --no-cache mongodb && \
-rm -f /usr/bin/mongosniff /usr/bin/mongoperf
+  echo 'http://dl-cdn.alpinelinux.org/alpine/latest-stable/main' >> /etc/apk/repositories && \
+  echo 'http://dl-cdn.alpinelinux.org/alpine/latest-stable/community' >> /etc/apk/repositories && \
+  apk update && \
+  apk add --no-cache mongodb
+
+RUN mongo --version
 
 VOLUME /data/db
 
