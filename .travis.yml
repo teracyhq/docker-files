@@ -39,7 +39,7 @@ env:
   # - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-17.07.0-ce DOCKER_ARGS="--build-arg UBUNTU_VERSION=16.04 --build-arg DOCKER_VERSION=17.07.0-ce"
   # - IMG_REPO=watchman BUILD_PATH=base IMG_TAG=4.9.0 DOCKER_ARGS="--build-arg WATCHMAN_VERSION=v4.9.0"
   - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=8.15 DOCKER_ARGS="--build-arg NODE_VERSION=8.15"
-  - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=10.15 DOCKER_ARGS="--build-arg NODE_VERSION=10.15"
+  - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=10.16 DOCKER_ARGS="--build-arg NODE_VERSION=10.16"
   - IMG_REPO=xtrabackup BUILD_PATH=base IMG_TAG=2.2 DOCKER_ARGS="--build-arg XTRABACKUP_PACKAGE=percona-xtrabackup-22"
   - IMG_REPO=xtrabackup BUILD_PATH=base IMG_TAG=2.3 DOCKER_ARGS="--build-arg XTRABACKUP_PACKAGE=percona-xtrabackup"
   - IMG_REPO=xtrabackup BUILD_PATH=base IMG_TAG=2.4 DOCKER_ARGS="--build-arg XTRABACKUP_PACKAGE=percona-xtrabackup-24"
