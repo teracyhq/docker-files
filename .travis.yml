@@ -17,7 +17,7 @@ env:
   - IMG_REPO=mongo-connector BUILD_PATH=base IMG_TAG=latest
   # - IMG_REPO=mongo-alpine BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=node-ruby BUILD_PATH=base IMG_TAG=latest
-  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=16.04-dind-latest
+  - IMG_REPO=ubuntu BUILD_PATH=base IMG_TAG=18.04-dind-latest
   - IMG_REPO=packer BUILD_PATH=latest IMG_TAG=latest
   - IMG_REPO=python-coveralls BUILD_PATH=base IMG_TAG=latest
   - IMG_REPO=travis BUILD_PATH=base IMG_TAG=latest
