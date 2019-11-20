@@ -27,6 +27,6 @@ RUN apt-get update -qy && apt-get install -qy apt-transport-https; \
     apt-get update -qy && apt-get install -y kubectl;
 
 # install helm
-RUN curl -LO https://git.io/get_helm.sh; \
+RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh; \
     chmod 700 get_helm.sh; \
     ./get_helm.sh;
