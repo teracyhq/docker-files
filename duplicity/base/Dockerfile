@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.6
+ARG ALPINE_VERSION=3.14
 FROM alpine:$ALPINE_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
@@ -17,7 +17,7 @@ RUN apk add --no-cache \
         duplicity \
         openssh \
         openssl \
-        py-crypto \
+        py-cryptography \
         py-pip \
         py-paramiko \
         py-setuptools \

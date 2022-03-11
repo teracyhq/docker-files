@@ -1,4 +1,4 @@
-ARG NODE_VERSION=10
+ARG NODE_VERSION=16
 FROM node:$NODE_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"

@@ -1,4 +1,4 @@
-ARG  UBUNTU_VERSION=16.04
+ARG  UBUNTU_VERSION=20.04
 FROM ubuntu:$UBUNTU_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
