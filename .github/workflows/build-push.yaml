@@ -1,0 +1,88 @@
+name: Build, Push Docker Images
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+  # to trigger manually with webhook
+  # curl -X POST https://api.github.com/repos/:owner/:repo/dispatches \
+  # -H 'Accept: application/vnd.github.everest-preview+json' \
+  # -H 'Authorization: token TOKEN_VALUE_HERE' \
+  # --data '{"event_type":"build-push","client_payload":{}}'
+  repository_dispatch:
+    types: [build-push]
+
+jobs:
+
+  build-push:
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [
+          {name: angular-cli, tag: latest, platforms: linux/amd64, build_path: base},
+          {name: aws-cli, tag: latest, platforms: linux/amd64, build_path: latest},
+          {name: chefdk, tag: latest, build_path: base},
+          {name: create-react-app, tag: latest, build_path: latest},
+          {name: duplicity, tag: latest, build_path: base},
+          {name: ubuntu, tag: 20.04-dind-latest, platforms: linux/amd64, build_path: base},
+          {name: ubuntu, tag: 20.04-dind-20.10.13, platforms: linux/amd64, build_path: base, build_args: DOCKER_VERSION=20.10.13},
+          {name: ubuntu, tag: 20.04-dind-19.03.15, platforms: linux/amd64, build_path: base, build_args: DOCKER_VERSION=19.03.15},
+          #{name: google-cloud-sdk, tag: latest, build_path: base},
+          {name: httpie-jwt-auth, tag: latest, platforms: linux/amd64, build_path: base, build_args: HTTPIE_JWT_AUTH_VERSION=0.3.0},
+          {name: httpie-jwt-auth, tag: latest-alpine, platforms: linux/amd64, build_path: base-alpine, build_args: HTTPIE_JWT_AUTH_VERSION=0.3.0},
+          {name: jenkins-dod, tag: latest, build_path: latest},
+          {name: mongo-connector, tag: latest, build_path: base},
+          {name: node-ruby, tag: latest, platforms: linux/amd64, build_path: base},
+          {name: packer, tag: latest, build_path: latest},
+          {name: python-coveralls, tag: latest, build_path: base},
+          # {name: xtrabackup, tag: latest, platforms: linux/amd64, build_path: base},
+        ]
+        experimental: [false]
+        # include:
+        #   - python: "3.10"
+        #     # known issue: https://github.com/nose-devs/nose/issues/1099
+        #     experimental: true
+    runs-on: ubuntu-20.04
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Normalized env vars
+      id: nev
+      run: |
+        source ./scripts/util.sh
+
+        DEFAULT_REGISTRIES="ghcr.io/${GITHUB_REPOSITORY}"
+        
+        if [ -z "$REGISTRIES" ]; then
+          META_IMAGES=$(build_meta_images $IMG_NAME)
+        else
+          META_IMAGES=$(build_meta_images $REGISTRIES $IMG_NAME)
+        fi
+        echo "::set-output name=meta_images::${META_IMAGES}"
+      env:
+        REGISTRIES: ${{ secrets.REGISTRIES }}
+        IMG_NAME: ${{ matrix.image.name }}
+
+    - name: Login to Docker registries
+      if: github.event_name != 'pull_request'
+      uses: teracyhq-incubator/.github/actions/docker-multiple-login-develop@main
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+        dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+        #gcr-json-key-base64: ${{ secrets.GCP_KEY_FILE_BASE64 }}
+
+
+    - name: Build, Push ${{ matrix.image.name }}
+      uses: teracyhq-incubator/.github/actions/docker-build-push-sign-develop@main
+      with:
+        meta-tags: |
+          type=raw,value=${{ matrix.image.tag }}
+        meta-images: ${{ steps.nev.outputs.meta_images }}
+        build-context: ./${{ matrix.image.name }}/${{ matrix.image.build_path}}
+        build-file: ${{ matrix.image.name }}/${{ matrix.image.build_path}}/Dockerfile # workaround for the bug
+        build-args: ${{ matrix.image.build_args }}
+        build-platforms: ${{ matrix.image.platforms }}
+        push-enabled: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
