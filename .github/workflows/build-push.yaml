@@ -36,7 +36,7 @@ jobs:
           {name: node-ruby, tag: latest, platforms: linux/amd64, build_path: base},
           {name: packer, tag: latest, build_path: latest},
           {name: python-coveralls, tag: latest, build_path: base},
-          # {name: xtrabackup, tag: latest, platforms: linux/amd64, build_path: base},
+          {name: xtrabackup, tag: latest, platforms: linux/amd64, build_path: base},
         ]
         experimental: [false]
         # include:
