@@ -37,6 +37,9 @@ jobs:
           {name: packer, tag: latest, build_path: latest},
           {name: python-coveralls, tag: latest, build_path: base},
           {name: xtrabackup, tag: latest, platforms: linux/amd64, build_path: base},
+          {name: xtrabackup, tag: "8.0", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-80},
+          {name: xtrabackup, tag: "2.4", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-24},
+          {name: xtrabackup, tag: "2.3", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup},
         ]
         experimental: [false]
         # include:

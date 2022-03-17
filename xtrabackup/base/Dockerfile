@@ -4,8 +4,8 @@ FROM debian:$DEBIAN_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
-# default (2.3.10); other possible values: percona-xtrabackup-24, percona-xtrabackup-80
-ARG XTRABACKUP_PACKAGE=percona-xtrabackup
+# default percona-xtrabackup-80; other possible values: percona-xtrabackup, percona-xtrabackup-24
+ARG XTRABACKUP_PACKAGE=percona-xtrabackup-80
 
 RUN apt-get update \
     && apt-get install -y --force-yes \
