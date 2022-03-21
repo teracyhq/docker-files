@@ -40,6 +40,8 @@ jobs:
           {name: xtrabackup, tag: "8.0", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-80},
           {name: xtrabackup, tag: "2.4", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-24},
           {name: xtrabackup, tag: "2.3", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup},
+          {name: xtrabackup, tag: "buster-8.0", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-80 DEBIAN_VERSION=buster},
+          {name: xtrabackup, tag: "buster-2.4", platforms: linux/amd64, build_path: base, build_args: XTRABACKUP_PACKAGE=percona-xtrabackup-24 DEBIAN_VERSION=buster},
         ]
         experimental: [false]
         # include:
@@ -64,9 +66,16 @@ jobs:
           META_IMAGES=$(build_meta_images $REGISTRIES $IMG_NAME)
         fi
         echo "::set-output name=meta_images::${META_IMAGES}"
+        # see:
+        # https://unix.stackexchange.com/questions/105569/bash-replace-space-with-new-line
+        # https://trstringer.com/github-actions-multiline-strings/
+        echo "BUILD_ARGS<<EOF" >> $GITHUB_ENV
+        echo $BUILD_ARGS | tr " " "\n" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
       env:
-        REGISTRIES: ${{ secrets.REGISTRIES }}
+        REGISTRIES: "${{ secrets.REGISTRIES }}"
         IMG_NAME: ${{ matrix.image.name }}
+        BUILD_ARGS: "${{ matrix.image.build_args }}"
 
     - name: Login to Docker registries
       if: github.event_name != 'pull_request'
@@ -82,10 +91,10 @@ jobs:
       uses: teracyhq-incubator/.github/actions/docker-build-push-sign-develop@main
       with:
         meta-tags: |
-          type=raw,value=${{ matrix.image.tag }}
+          type=raw,value=${{ secrets.IMAGE_TAG_PREFIX }}${{ matrix.image.tag }}
         meta-images: ${{ steps.nev.outputs.meta_images }}
         build-context: ./${{ matrix.image.name }}/${{ matrix.image.build_path}}
         build-file: ${{ matrix.image.name }}/${{ matrix.image.build_path}}/Dockerfile # workaround for the bug
-        build-args: ${{ matrix.image.build_args }}
+        build-args: ${{ env.BUILD_ARGS }}
         build-platforms: ${{ matrix.image.platforms }}
         push-enabled: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}

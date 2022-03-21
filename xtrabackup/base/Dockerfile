@@ -1,3 +1,4 @@
+# Use the current LTS release as default: https://wiki.debian.org/LTS
 ARG DEBIAN_VERSION=stretch
 
 FROM debian:$DEBIAN_VERSION
