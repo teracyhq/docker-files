@@ -1,6 +1,8 @@
 name: Build, Push Docker Images
 
 on:
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
   push:
   pull_request:
@@ -61,9 +63,9 @@ jobs:
         DEFAULT_REGISTRIES="ghcr.io/${GITHUB_REPOSITORY}"
         
         if [ -z "$REGISTRIES" ]; then
-          META_IMAGES=$(build_meta_images $IMG_NAME)
+          META_IMAGES=$(build_meta_images ${IMG_NAME_PREFIX}${IMG_NAME})
         else
-          META_IMAGES=$(build_meta_images $REGISTRIES $IMG_NAME)
+          META_IMAGES=$(build_meta_images $REGISTRIES ${IMG_NAME_PREFIX}${IMG_NAME})
         fi
         echo "::set-output name=meta_images::${META_IMAGES}"
         # see:
@@ -72,10 +74,18 @@ jobs:
         echo "BUILD_ARGS<<EOF" >> $GITHUB_ENV
         echo $BUILD_ARGS | tr " " "\n" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
+
+        # enabled to push docker image on git commit on the master branch by default
+        if [ -z "$PUSH_ENABLED" ]; then
+          PUSH_ENABLED=true
+        fi
+        echo "::set-output name=push_enabled::${PUSH_ENABLED}"
       env:
         REGISTRIES: "${{ secrets.REGISTRIES }}"
         IMG_NAME: ${{ matrix.image.name }}
+        IMG_NAME_PREFIX: ${{ secrets.IMG_NAME_PREFIX }}
         BUILD_ARGS: "${{ matrix.image.build_args }}"
+        PUSH_ENABLED: ${{ secrets.PUSH_ENABLED }}
 
     - name: Login to Docker registries
       if: github.event_name != 'pull_request'
@@ -87,14 +97,14 @@ jobs:
         #gcr-json-key-base64: ${{ secrets.GCP_KEY_FILE_BASE64 }}
 
 
-    - name: Build, Push ${{ matrix.image.name }}
+    - name: Build, Push ${{ matrix.image.name }} ${{ matrix.image.tag }}
       uses: teracyhq-incubator/.github/actions/docker-build-push-sign-develop@main
       with:
         meta-tags: |
-          type=raw,value=${{ secrets.IMAGE_TAG_PREFIX }}${{ matrix.image.tag }}
+          type=raw,value=${{ matrix.image.tag }}
         meta-images: ${{ steps.nev.outputs.meta_images }}
         build-context: ./${{ matrix.image.name }}/${{ matrix.image.build_path}}
         build-file: ${{ matrix.image.name }}/${{ matrix.image.build_path}}/Dockerfile # workaround for the bug
         build-args: ${{ env.BUILD_ARGS }}
         build-platforms: ${{ matrix.image.platforms }}
-        push-enabled: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
+        push-enabled: ${{ steps.nev.outputs.push_enabled == 'true' && github.event_name != 'pull_request' && github.ref_name == 'master' }}
