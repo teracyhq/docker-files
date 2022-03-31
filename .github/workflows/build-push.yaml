@@ -58,16 +58,6 @@ jobs:
     - name: Normalized env vars
       id: nev
       run: |
-        source ./scripts/util.sh
-
-        DEFAULT_REGISTRIES="ghcr.io/${GITHUB_REPOSITORY}"
-        
-        if [ -z "$REGISTRIES" ]; then
-          META_IMAGES=$(build_meta_images ${IMG_NAME_PREFIX}${IMG_NAME})
-        else
-          META_IMAGES=$(build_meta_images $REGISTRIES ${IMG_NAME_PREFIX}${IMG_NAME})
-        fi
-        echo "::set-output name=meta_images::${META_IMAGES}"
         # see:
         # https://unix.stackexchange.com/questions/105569/bash-replace-space-with-new-line
         # https://trstringer.com/github-actions-multiline-strings/
@@ -81,9 +71,6 @@ jobs:
         fi
         echo "::set-output name=push_enabled::${PUSH_ENABLED}"
       env:
-        REGISTRIES: "${{ secrets.REGISTRIES }}"
-        IMG_NAME: ${{ matrix.image.name }}
-        IMG_NAME_PREFIX: ${{ secrets.IMG_NAME_PREFIX }}
         BUILD_ARGS: "${{ matrix.image.build_args }}"
         PUSH_ENABLED: ${{ secrets.PUSH_ENABLED }}
 
@@ -102,9 +89,9 @@ jobs:
       with:
         meta-tags: |
           type=raw,value=${{ matrix.image.tag }}
-        meta-images: ${{ steps.nev.outputs.meta_images }}
+        meta-registries: ${{ secrets.REGISTRIES }}
+        meta-image-name: "${{secrets.IMG_NAME_PREFIX}}${{matrix.image.name}}"
         build-context: ./${{ matrix.image.name }}/${{ matrix.image.build_path}}
-        build-file: ${{ matrix.image.name }}/${{ matrix.image.build_path}}/Dockerfile # workaround for the bug
         build-args: ${{ env.BUILD_ARGS }}
         build-platforms: ${{ matrix.image.platforms }}
         push-enabled: ${{ steps.nev.outputs.push_enabled == 'true' && github.event_name != 'pull_request' && github.ref_name == 'master' }}
