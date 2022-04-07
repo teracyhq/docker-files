@@ -24,7 +24,6 @@ jobs:
         image: [
           {name: angular-cli, tag: latest, platforms: linux/amd64, build_path: base},
           {name: aws-cli, tag: latest, platforms: linux/amd64, build_path: latest},
-          {name: chefdk, tag: latest, build_path: base},
           {name: create-react-app, tag: latest, build_path: latest},
           {name: duplicity, tag: latest, build_path: base},
           {name: ubuntu, tag: 20.04-dind-latest, platforms: linux/amd64, build_path: base},
