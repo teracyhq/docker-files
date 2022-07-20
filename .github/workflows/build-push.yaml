@@ -33,7 +33,7 @@ jobs:
           #{name: google-cloud-sdk, tag: latest, build_path: base},
           {name: httpie-jwt-auth, tag: latest, platforms: linux/amd64, build_path: base, build_args: HTTPIE_JWT_AUTH_VERSION=0.3.0},
           {name: httpie-jwt-auth, tag: latest-alpine, platforms: linux/amd64, build_path: base-alpine, build_args: HTTPIE_JWT_AUTH_VERSION=0.3.0},
-          {name: jenkins-dod, tag: latest, build_path: latest},
+          #{name: jenkins-dod, tag: latest, build_path: latest},
           {name: mongo-connector, tag: latest, build_path: base},
           {name: node-ruby, tag: latest, platforms: linux/amd64, build_path: base},
           {name: packer, tag: latest, build_path: latest},
