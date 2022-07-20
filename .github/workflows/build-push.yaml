@@ -22,7 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         image: [
-          {name: angular-cli, tag: latest, platforms: linux/amd64, build_path: base},
+          {name: angular-cli, tag: latest, platforms: linux/amd64, build_path: base, build_args: NG_CLI_VERSION=latest},
+          {name: angular-cli, tag: 14.0.6, platforms: linux/amd64, build_path: base, build_args: NG_CLI_VERSION=14.0.6},
           {name: aws-cli, tag: latest, platforms: linux/amd64, build_path: latest},
           {name: create-react-app, tag: latest, build_path: latest},
           {name: duplicity, tag: latest, build_path: base},
